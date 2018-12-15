@@ -1,3 +1,5 @@
+<?php
+session_start(); ?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -578,40 +580,54 @@
 		</div>
 		<div class="choose animate-box">
 			<h2>Contact</h2>
-			<form action="contact_submit.php" method="post">
-				<div class="row form-group">
-					<div class="col-md-6">
-						<input type="text" id="fname" name="fname" class="form-control" placeholder="Your firstname">
+			<?php // TODO: get javascript to send this message and post the success message without refreshing the page ?>
+			<?php
+			if(isset($_SESSION['message'])){
+				echo $_SESSION['message'] . "<br>";
+				unset($_SESSION['message']);
+				echo "<strong>Your Name: </strong>" . $_SESSION['information']['fname'] . " " . $_SESSION['information']['lname'] . "<br>";
+				echo "<strong>Your Email: </strong>" . $_SESSION['information']['email'] . "<br>";
+				echo "<strong>Your Message: </strong>";
+				echo "<br><strong>" . $_SESSION['information']['subject'] . "</strong><br>";
+				echo $_SESSION['information']['message'] . "<br>";
+			}
+			else{?>
+				<form action="contact_submit.php" method="post">
+					<div class="row form-group">
+						<div class="col-md-6">
+							<input type="text" id="fname" name="fname" class="form-control" placeholder="Your firstname">
+						</div>
 					</div>
-				</div>
-				<div class="row form-group">
-					<div class="col-md-6">
-						<input type="text" id="lname" name="lname" class="form-control" placeholder="Your lastname">
+					<div class="row form-group">
+						<div class="col-md-6">
+							<input type="text" id="lname" name="lname" class="form-control" placeholder="Your lastname">
+						</div>
 					</div>
-				</div>
 
-				<div class="row form-group">
-					<div class="col-md-12">
-						<input type="email" id="email" name="email" class="form-control" placeholder="Your email address">
+					<div class="row form-group">
+						<div class="col-md-12">
+							<input type="email" id="email" name="email" class="form-control" placeholder="Your email address">
+						</div>
 					</div>
-				</div>
 
-				<div class="row form-group">
-					<div class="col-md-12">
-						<input type="text" id="subject" name="subject" class="form-control" placeholder="Your subject of this message">
+					<div class="row form-group">
+						<div class="col-md-12">
+							<input type="text" id="subject" name="subject" class="form-control" placeholder="Your subject of this message">
+						</div>
 					</div>
-				</div>
 
-				<div class="row form-group">
-					<div class="col-md-12">
-						<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
+					<div class="row form-group">
+						<div class="col-md-12">
+							<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Send Message" class="btn btn-primary">
-				</div>
+					<div class="form-group">
+						<input type="submit" value="Send Message" class="btn btn-primary">
+					</div>
 
-			</form>
+				</form>
+			<?php } ?>
+
 		</div>
 	</div>
 
