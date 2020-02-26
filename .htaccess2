@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^$ /Brandon_Haberman_Resume.pdf [L]
